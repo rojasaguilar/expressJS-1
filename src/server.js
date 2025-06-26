@@ -1,5 +1,4 @@
 const express = require('express')
-const nodemon = require('nodemon')
 
 const app = express();
 
@@ -10,7 +9,7 @@ app.get('/' , (req,res) => {
 })
 
 app.get('/home' , (req,res) => {
-    console.log(req)
+    console.log(req.query.id)
     res.json('hello')
 })
 
