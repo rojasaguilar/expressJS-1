@@ -1,11 +1,20 @@
 const express = require('express')
+const fs = require('fs')
 
+
+
+//EXPRESS CONFIGURATION
 const app = express();
-
 app.use(express.json());
 
-app.get('/' , (req,res) => {
-    res.json('hello')
+
+//ROUTES 
+app.get('/people' , (req,res) => {
+   fs.readFile('./people.json',(err,data) => {
+    const people = JSON.parse(data)
+     res.json(people)
+})
+   
 })
 
 app.get('/home' , (req,res) => {
@@ -13,6 +22,7 @@ app.get('/home' , (req,res) => {
     res.json('hello')
 })
 
+//SERVER LISTENER
 app.listen(8899,() => {
     console.log("listening in the port 8899..")
 })
