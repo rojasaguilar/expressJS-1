@@ -10,14 +10,17 @@ app.use(express.json());
 
 //ROUTES 
 app.get('/people' , (req,res) => {
-   fs.readFile('./people.json',(err,data) => {
-    const people = JSON.parse(data)
-     res.json(people)
-})
-   
+    fs.readFile('./people.json',(err,data) => {
+        const people = JSON.parse(data)
+        if(req.query.name == req.query.name) {
+            res.json(people.find(person => person.name.toLowerCase() === req.query.name)) 
+            return;
+        }
+        res.json(people);
+    })  
 })
 
-app.get('/home' , (req,res) => {
+app.get('/' , (req,res) => {
     console.log(req.query.id)
     res.json('hello')
 })
